@@ -1,4 +1,4 @@
-package br.com.bandtec.locadora;
+package br.com.bandtec.locadora.modelo;
 
 public class PilhaObj <T> {
 
