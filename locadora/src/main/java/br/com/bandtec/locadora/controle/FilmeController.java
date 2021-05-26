@@ -15,12 +15,6 @@ public class FilmeController {
     @Autowired
     private FilmeRepository repository;
 
-    @PostMapping
-    public ResponseEntity postFilme(@RequestBody @Valid Filme novoFilme) {
-
-        repository.save(novoFilme);
-        return ResponseEntity.status(201).build();
-    }
 
     @GetMapping
     public ResponseEntity getFilmes() {
@@ -30,8 +24,40 @@ public class FilmeController {
 
     @GetMapping("/genero/{idGenero}")
     public ResponseEntity getFilmesPorGenero(@PathVariable int idGenero) {
-        return ResponseEntity.status(200).body(repository.pesquisarPorGenero(idGenero));
+        return ResponseEntity.status(200).body(repository.findByGenero(idGenero));
 
+    }
+
+    @GetMapping("/precos")
+    public ResponseEntity getPrecosFilmes() {
+        return ResponseEntity.status(200).body(repository.findAllFilmePreco());
+    }
+
+    @PostMapping
+    public ResponseEntity postFilme(@RequestBody @Valid Filme novoFilme) {
+
+        repository.save(novoFilme);
+        return ResponseEntity.status(201).build();
+    }
+
+    @PutMapping("{idFilme}")
+    public ResponseEntity putFilme(@RequestBody Filme filmeAtualizado) {
+
+        repository.save(filmeAtualizado);
+        return ResponseEntity.status(201).build();
+    }
+
+    @DeleteMapping("{idFilme}")
+    public ResponseEntity deleteFilme(@RequestBody int filmeExcluido) {
+
+        repository.findById(filmeExcluido);
+        return ResponseEntity.status(200).build();
+    }
+
+    @DeleteMapping
+    public ResponseEntity desfazerPutFilme() {
+
+        return ResponseEntity.status(200).build();
     }
 
 

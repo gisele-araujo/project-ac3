@@ -36,6 +36,14 @@ public class Filme {
     @NotNull
     private double precoLocacao;
 
+    @Size(max = 300)
+    private String sinopse;
+
+
+    public double calcularPrecoLocacao() {
+
+        return qtdDiasLocacao * precoLocacao;
+    }
 
 
     public int getId() {
@@ -101,4 +109,13 @@ public class Filme {
     public void setPrecoLocacao(double precoLocacao) {
         this.precoLocacao = precoLocacao;
     }
+
+    public String getSinopse() {
+        return sinopse;
+    }
+
+    public void setSinopse(String sinopse) {
+        this.sinopse = sinopse;
+    }
+
 }
