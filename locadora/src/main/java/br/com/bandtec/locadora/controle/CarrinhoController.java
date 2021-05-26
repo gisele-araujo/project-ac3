@@ -19,6 +19,8 @@ public class CarrinhoController {
 
     @Autowired
     private CarrinhoRepository repository;
+
+    @Autowired
     private FilmeRepository filmes;
 
     @GetMapping
@@ -51,17 +53,19 @@ public class CarrinhoController {
     }
 
     @PostMapping("/{idCarrinho}/{idFilme}")
-    public ResponseEntity alugarFilme(@Valid @PathVariable Integer idCarrinho,
-                                      @Valid @PathVariable Integer idFilme) {
+    public ResponseEntity alugarFilme(@PathVariable Integer idCarrinho,
+                                      @PathVariable Integer idFilme) {
 
         if(repository.existsById(idCarrinho) && filmes.existsById(idFilme) ) {
 
-            /* List<Filme> clienteCarrinho = repository.findById(idCarrinho).get().getFilmes();
+            Carrinho clienteCarrinho = repository.findById(idCarrinho).get();
+            List<Filme> listaFilmeCliente = clienteCarrinho.getFilmes();
             Filme filmeEscolhido = filmes.findById(idFilme).get();
-            clienteCarrinho.add(filmeEscolhido); */
 
+            listaFilmeCliente.add(filmeEscolhido);
+            repository.save(clienteCarrinho);
 
-            return ResponseEntity.status(201).build();
+            return ResponseEntity.status(201).body(filmeEscolhido);
         } else {
             return ResponseEntity.status(404).build();
         }
