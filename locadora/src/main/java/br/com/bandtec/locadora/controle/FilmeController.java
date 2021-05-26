@@ -22,11 +22,11 @@ public class FilmeController {
         return ResponseEntity.status(200).body(repository.findAll());
     }
 
-    @GetMapping("/genero/{idGenero}")
+    /* @GetMapping("/genero/{idGenero}")
     public ResponseEntity getFilmesPorGenero(@PathVariable int idGenero) {
         return ResponseEntity.status(200).body(repository.findByGenero(idGenero));
 
-    }
+    }*/
 
     @GetMapping("/precos")
     public ResponseEntity getPrecosFilmes() {

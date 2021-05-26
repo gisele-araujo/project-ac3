@@ -19,7 +19,7 @@ public class GeneroController {
     public ResponseEntity postGenero(@RequestBody @Valid Genero novoGenero) {
 
         repository.save(novoGenero);
-        return  ResponseEntity.status(201).build();
+        return ResponseEntity.status(201).build();
     }
 
     @GetMapping

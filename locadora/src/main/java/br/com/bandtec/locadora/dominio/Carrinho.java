@@ -8,11 +8,11 @@ public class Carrinho {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
 
     private String nomeCliente;
 
-    @ManyToOne
+    @OneToMany
     private List<Filme> filmes;
 
     private double precoTotal;
@@ -22,9 +22,9 @@ public class Carrinho {
 
         double total = 0.00;
 
-        for (Filme filme : filmes) {
+        /* for (Filme filme : filmes) {
             total = filme.calcularPrecoLocacao();
-        }
+        } */
 
         return total;
     }
@@ -45,14 +45,14 @@ public class Carrinho {
         this.nomeCliente = nomeCliente;
     }
 
-    public List<Filme> getFilmes() {
+   /* public List<Filme> getFilmes() {
         return filmes;
     }
 
     public void setFilmes(List<Filme> filmes) {
         this.filmes = filmes;
     }
-
+*/
     public double getPrecoTotal() {
         return precoTotalCarrinho();
     }
