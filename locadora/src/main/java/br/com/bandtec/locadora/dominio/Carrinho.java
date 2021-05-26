@@ -1,6 +1,11 @@
 package br.com.bandtec.locadora.dominio;
 
+import org.springframework.data.annotation.ReadOnlyProperty;
+
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.PositiveOrZero;
+import javax.validation.constraints.Size;
 import java.util.List;
 
 @Entity
@@ -10,30 +15,34 @@ public class Carrinho {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @NotBlank
+    @Size(min = 5, max = 40)
     private String nomeCliente;
 
     @OneToMany
     private List<Filme> filmes;
 
-    private double precoTotal;
+    @PositiveOrZero
+    @ReadOnlyProperty
+    private Double precoTotal;
 
 
-    private double precoTotalCarrinho() {
+    private Double precoTotalCarrinho() {
 
         double total = 0.00;
 
-        /* for (Filme filme : filmes) {
+        for (Filme filme : filmes) {
             total = filme.calcularPrecoLocacao();
-        } */
+        }
 
         return total;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -45,15 +54,15 @@ public class Carrinho {
         this.nomeCliente = nomeCliente;
     }
 
-   /* public List<Filme> getFilmes() {
+   public List<Filme> getFilmes() {
         return filmes;
     }
 
     public void setFilmes(List<Filme> filmes) {
         this.filmes = filmes;
     }
-*/
-    public double getPrecoTotal() {
+
+    public Double getPrecoTotal() {
         return precoTotalCarrinho();
     }
 }

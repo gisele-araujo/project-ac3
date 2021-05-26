@@ -1,6 +1,7 @@
 package br.com.bandtec.locadora.controle;
 
 import br.com.bandtec.locadora.dominio.Filme;
+import br.com.bandtec.locadora.modelo.PilhaObj;
 import br.com.bandtec.locadora.repositorio.FilmeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -15,18 +16,32 @@ public class FilmeController {
     @Autowired
     private FilmeRepository repository;
 
+    PilhaObj<Filme> pilhaFilme = new PilhaObj<>(1);
+
 
     @GetMapping
     public ResponseEntity getFilmes() {
 
-        return ResponseEntity.status(200).body(repository.findAll());
+        if(repository.findAll().isEmpty()) {
+            return ResponseEntity.status(204).build();
+
+        } else {
+            return ResponseEntity.status(200).body(repository.findAll());
+
+        }
     }
 
-    /* @GetMapping("/genero/{idGenero}")
+    @GetMapping("/genero/{idGenero}")
     public ResponseEntity getFilmesPorGenero(@PathVariable int idGenero) {
-        return ResponseEntity.status(200).body(repository.findByGenero(idGenero));
 
-    }*/
+        if(repository.existsById(idGenero)) {
+            return ResponseEntity.status(200).body(repository.findByGeneroId(idGenero));
+
+        } else {
+            return ResponseEntity.status(404).build();
+
+        }
+    }
 
     @GetMapping("/precos")
     public ResponseEntity getPrecosFilmes() {
@@ -41,17 +56,22 @@ public class FilmeController {
     }
 
     @PutMapping("{idFilme}")
-    public ResponseEntity putFilme(@RequestBody Filme filmeAtualizado) {
+    public ResponseEntity putFilme(@RequestBody Filme idFilme) {
 
-        repository.save(filmeAtualizado);
+        repository.save(idFilme);
         return ResponseEntity.status(201).build();
     }
 
     @DeleteMapping("{idFilme}")
-    public ResponseEntity deleteFilme(@RequestBody int filmeExcluido) {
+    public ResponseEntity deleteFilme(@RequestBody Integer idFilme) {
 
-        repository.findById(filmeExcluido);
-        return ResponseEntity.status(200).build();
+        if(repository.existsById(idFilme)) {
+            repository.deleteById(idFilme);
+            return ResponseEntity.status(200).build();
+
+        } else {
+            return ResponseEntity.status(404).build();
+        }
     }
 
     @DeleteMapping
@@ -59,6 +79,4 @@ public class FilmeController {
 
         return ResponseEntity.status(200).build();
     }
-
-
 }

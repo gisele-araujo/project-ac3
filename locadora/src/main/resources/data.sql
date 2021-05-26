@@ -25,3 +25,9 @@ values
  ('Central do Brasil', 'Walter Salles', 1999, true, 1, 1.8,
  'Dora trabalha escrevendo cartas para analfabetos na estação Central do Brasil, no Rio de Janeiro. A escrivã ajuda um menino, após sua mãe ser atropelada, a tentar encontrar o pai que nunca conheceu, no interior do Nordeste.',
  2);
+
+ insert into carrinho
+ (nome_cliente)
+ values
+ ('Gisele de Araujo Flor'),
+ ('Christiano Peres');

@@ -17,40 +17,41 @@ public class Filme {
     @Size(min = 2, max = 50)
     private String nome;
 
+    @NotBlank
     @Size(min = 2, max = 50)
     private String diretor;
 
-    private int anoLancamento;
+    @PositiveOrZero
+    private Integer anoLancamento;
 
-    private boolean nacional;
+    private Boolean nacional;
 
     @ManyToOne
     @NotNull
     private Genero genero;
 
-    @PositiveOrZero
     @NotNull
-    private int qtdDiasLocacao;
+    @PositiveOrZero
+    private Integer qtdDiasLocacao;
 
-    @PositiveOrZero
     @NotNull
-    private double precoLocacao;
+    @PositiveOrZero
+    private Double precoLocacao;
 
     @Size(max = 300)
     private String sinopse;
 
 
-    public double calcularPrecoLocacao() {
+    public Double calcularPrecoLocacao() {
 
         return qtdDiasLocacao * precoLocacao;
     }
 
-
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -70,19 +71,19 @@ public class Filme {
         this.diretor = diretor;
     }
 
-    public int getAnoLancamento() {
+    public Integer getAnoLancamento() {
         return anoLancamento;
     }
 
-    public void setAnoLancamento(int anoLancamento) {
+    public void setAnoLancamento(Integer anoLancamento) {
         this.anoLancamento = anoLancamento;
     }
 
-    public boolean isNacional() {
+    public Boolean getNacional() {
         return nacional;
     }
 
-    public void setNacional(boolean nacional) {
+    public void setNacional(Boolean nacional) {
         this.nacional = nacional;
     }
 
@@ -94,19 +95,19 @@ public class Filme {
         this.genero = genero;
     }
 
-    public int getQtdDiasLocacao() {
+    public Integer getQtdDiasLocacao() {
         return qtdDiasLocacao;
     }
 
-    public void setQtdDiasLocacao(int qtdDiasLocacao) {
+    public void setQtdDiasLocacao(Integer qtdDiasLocacao) {
         this.qtdDiasLocacao = qtdDiasLocacao;
     }
 
-    public double getPrecoLocacao() {
+    public Double getPrecoLocacao() {
         return precoLocacao;
     }
 
-    public void setPrecoLocacao(double precoLocacao) {
+    public void setPrecoLocacao(Double precoLocacao) {
         this.precoLocacao = precoLocacao;
     }
 
@@ -117,5 +118,4 @@ public class Filme {
     public void setSinopse(String sinopse) {
         this.sinopse = sinopse;
     }
-
 }
