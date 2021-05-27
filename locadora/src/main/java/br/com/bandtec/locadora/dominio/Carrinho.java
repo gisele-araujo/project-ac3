@@ -32,7 +32,7 @@ public class Carrinho {
         double total = 0.00;
 
         for (Filme filme : filmes) {
-            total = filme.calcularPrecoLocacao();
+            total += filme.calcularPrecoLocacao();
         }
 
         return total;

@@ -3,7 +3,6 @@ package br.com.bandtec.locadora.dominio;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import java.util.List;
 
 @Entity
 public class Genero {

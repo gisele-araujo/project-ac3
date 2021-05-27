@@ -23,14 +23,17 @@ public class CarrinhoController {
     @Autowired
     private FilmeRepository filmes;
 
+    PilhaObj<Filme> pilhaFilmes = new PilhaObj<>(10);
+
+
     @GetMapping
     public ResponseEntity getCarrinhos() {
 
         if(repository.findAll().isEmpty()) {
             return ResponseEntity.status(204).build();
+
         } else {
             return ResponseEntity.status(200).body(repository.findAll());
-
         }
     }
 
@@ -63,17 +66,30 @@ public class CarrinhoController {
             Filme filmeEscolhido = filmes.findById(idFilme).get();
 
             listaFilmeCliente.add(filmeEscolhido);
+            pilhaFilmes.push(filmeEscolhido);
             repository.save(clienteCarrinho);
 
-            return ResponseEntity.status(201).body(filmeEscolhido);
+
+            return ResponseEntity.status(201).build();
         } else {
             return ResponseEntity.status(404).build();
         }
     }
 
-    @DeleteMapping
-    public ResponseEntity desfazerPostAlugarFilme() {
 
-        return ResponseEntity.status(200).build();
+    // desfazer post de filme alugado de um determinado carrinho
+
+    @DeleteMapping("/desfazer-post/{idCarrinho}")
+    public ResponseEntity desfazerAlugarFilme(@PathVariable Integer idCarrinho) {
+
+        Carrinho carrinhoAlvo = repository.findById(idCarrinho).get();
+
+        if(pilhaFilmes.isEmpty()) {
+            return ResponseEntity.status(204).body("Não foi possível desfazer POST, não existem filmes alugados em sua lista.");
+        } else {
+            carrinhoAlvo.getFilmes().remove((pilhaFilmes.pop().getId()));
+            repository.save(carrinhoAlvo);
+            return ResponseEntity.status(200).build();
+        }
     }
 }

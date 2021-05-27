@@ -16,7 +16,7 @@ public class FilmeController {
     @Autowired
     private FilmeRepository repository;
 
-    PilhaObj<Filme> pilhaFilme = new PilhaObj<>(1);
+    PilhaObj<Filme> pilha = new PilhaObj<>(10);
 
 
     @GetMapping
@@ -27,7 +27,6 @@ public class FilmeController {
 
         } else {
             return ResponseEntity.status(200).body(repository.findAll());
-
         }
     }
 
@@ -39,13 +38,18 @@ public class FilmeController {
 
         } else {
             return ResponseEntity.status(404).build();
-
         }
     }
 
     @GetMapping("/precos")
     public ResponseEntity getPrecosFilmes() {
-        return ResponseEntity.status(200).body(repository.findAllFilmePreco());
+
+        if(repository.findAll().isEmpty()) {
+            return ResponseEntity.status(204).build();
+
+        } else {
+            return ResponseEntity.status(200).body(repository.findAllFilmePreco());
+        }
     }
 
     @PostMapping
@@ -55,15 +59,24 @@ public class FilmeController {
         return ResponseEntity.status(201).build();
     }
 
-    @PutMapping("{idFilme}")
-    public ResponseEntity putFilme(@RequestBody Filme idFilme) {
+    @PutMapping("/{idFilme}")
+    public ResponseEntity putFilme(@PathVariable Integer idFilme,
+                                   @RequestBody @Valid Filme atualizarFilme) {
 
-        repository.save(idFilme);
-        return ResponseEntity.status(201).build();
+        pilha.push(repository.findById(idFilme).get());
+
+        if (repository.existsById(idFilme)) {
+            atualizarFilme.setId(idFilme);
+            repository.save(atualizarFilme);
+
+            return ResponseEntity.status(201).build();
+        } else {
+            return ResponseEntity.status(404).build();
+        }
     }
 
     @DeleteMapping("{idFilme}")
-    public ResponseEntity deleteFilme(@RequestBody Integer idFilme) {
+    public ResponseEntity deleteFilme(@PathVariable Integer idFilme) {
 
         if(repository.existsById(idFilme)) {
             repository.deleteById(idFilme);
@@ -74,9 +87,18 @@ public class FilmeController {
         }
     }
 
-    @DeleteMapping
+    // desfazer ultimo update de filmes
+
+    @DeleteMapping("/desfazer-update")
     public ResponseEntity desfazerPutFilme() {
 
-        return ResponseEntity.status(200).build();
+        if(pilha.isEmpty()) {
+            String message = "Não foi possível desfazer POST, não existem generos.";
+            return  ResponseEntity.status(204).body(message);
+
+        } else {
+            repository.save(pilha.pop());
+            return ResponseEntity.status(200).body(pilha.pop());
+        }
     }
 }
