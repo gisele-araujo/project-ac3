@@ -1,6 +1,7 @@
 package br.com.bandtec.locadora.controle;
 
 import br.com.bandtec.locadora.dominio.Filme;
+import br.com.bandtec.locadora.modelo.FilaObj;
 import br.com.bandtec.locadora.modelo.PilhaObj;
 import br.com.bandtec.locadora.repositorio.FilmeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
