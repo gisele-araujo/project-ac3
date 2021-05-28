@@ -10,9 +10,8 @@ public class LeArquivo {
         BufferedReader entrada = null;
         String registro;
         String tipoRegistro;
-        String nome, diretor, sinopse;
-        Integer anoLancamento, genero, contRegistro=0;;
-        Boolean nacional;
+        String nome, diretor, sinopse, nacional;
+        Integer anoLancamento, genero, contRegistro=0;
         Double precoLocacao;
 
         // Abre o arquivo
@@ -58,10 +57,10 @@ public class LeArquivo {
                     nome = registro.substring(2,52);
                     diretor = registro.substring(52,102);
                     anoLancamento = Integer.parseInt(registro.substring(102,106));
-                    nacional = Boolean.parseBoolean(registro.substring(106,112));
-                    genero = Integer.parseInt(registro.substring(112,142));
-                    precoLocacao = Double.parseDouble(registro.substring(142,172).replace(',','.'));
-                    sinopse = registro.substring(172,472);
+                    nacional = registro.substring(106,112);
+                    genero = Integer.parseInt(registro.substring(112,116));
+                    precoLocacao = Double.parseDouble(registro.substring(116,126).replace(',','.'));
+                    sinopse = registro.substring(126,426);
 
                     System.out.printf("%-50s %-50s %4d %-5s %5d %10.2f %300s\n", nome, diretor, anoLancamento, nacional,
                             genero, precoLocacao, sinopse);

@@ -1,5 +1,5 @@
-00FILMES-REGISTRO27-05-2021 21:51:2301
+00FILMES-REGISTRO27-05-2021 22:07:4801
 02ROCKY, um lutador                                 Silvester Stallone                                1997false000020000002,30Rocky Balboa, um pequeno boxeador da classe trabalhadora da Filadélfia, é arbitrariamente escolhido para lutar contra o campeão dos pesos pesados, Apollo Creed.                                                                                                                                            
 02A fada do repolho                                 Alice Guy                                         1900false000020000000,20Ele é baseado em uma antiga lenda francesa, segundo a qual bebês meninos nascem de repolhos, enquanto as meninas nasceriam de rosas.                                                                                                                                                                        
 02Movo avião                                        Cesar Rodrigues                                   2020true 000020000001,20Ana recebe uma proposta para ser influenciadora digital de uma marca renomada. Ela larga a faculdade para investir todo o seu tempo na página digital criando publicações, mas o trabalho que a princípio seria incrível, foi ficando cada vez mais nocivo para ela mesma.                                  
-0100003
+010000000003

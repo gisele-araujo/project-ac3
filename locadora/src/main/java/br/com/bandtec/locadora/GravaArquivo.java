@@ -86,7 +86,7 @@ public class GravaArquivo {
 
         // monta o trailer
         trailer += "01";
-        trailer += String.format("%05d", contRegDados);
+        trailer += String.format("%010d", contRegDados);
         gravaRegistro(nomeArq,trailer);
     }
 
