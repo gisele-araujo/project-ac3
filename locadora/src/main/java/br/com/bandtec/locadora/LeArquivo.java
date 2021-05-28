@@ -14,16 +14,16 @@ public class LeArquivo {
         Integer anoLancamento, genero, contRegistro=0;
         Double precoLocacao;
 
-        // Abre o arquivo
+
         try {
             entrada = new BufferedReader(new FileReader(nomeArq));
         } catch (IOException e) {
             System.err.printf("Erro na abertura do arquivo: %s.\n", e.getMessage());
         }
 
-        // Lê os registros do arquivo
+
         try {
-            // Lê um registro
+
             registro = entrada.readLine();
 
             while (registro != null) {
@@ -70,11 +70,9 @@ public class LeArquivo {
                     System.out.println("Tipo de registro inválido");
                 }
 
-                // lê o próximo registro
                 registro = entrada.readLine();
             }
 
-            // Fecha o arquivo
             entrada.close();
         } catch (IOException e) {
             System.err.printf("Erro ao ler arquivo: %s.\n", e.getMessage());
